@@ -36,7 +36,27 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <script>
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(36.22946945195012, 44.00417889701195),
+                zoom: 17,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var shipmentMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(36.22946945195012, 44.00417889701195),
+                map: map
+            });
+            
+            var shipmentinfoWindow = new google.maps.InfoWindow();
+            (function (shipmentMarker) {
+                google.maps.event.addListener(shipmentMarker, "click", function (e) {
+                    shipmentinfoWindow.setContent("Shipment Operation");
+                    shipmentinfoWindow.open(map, shipmentMarker);
+                });
+            })(shipmentMarker); 
+        }
+    </script>
 </head>
 
 <body>
@@ -663,7 +683,7 @@
             <div class="container">
                 <div class="row">
                     <div class="footer-in-main">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="footer-box-a">
                                 <h3>About Us</h3>
                                 <p>we are the most famous and delicious restaurant all over erbil that serve asian food</p>
@@ -690,7 +710,7 @@
                         </div>
                         <!-- end col -->
                         
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="footer-box-c">
                                 <h3>Contact Us</h3>
                                 <p>
@@ -715,7 +735,7 @@
                             <!-- end footer-box-c -->
                         </div>
                         <!-- end col -->
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="footer-box-d">
                                 <h3>Opening Hours</h3>
 
@@ -725,6 +745,14 @@
                                         <span>  11:00 AM - 2:00 AM</span>
                                     </li>
                                 </ul>
+                            </div>
+                            <!-- end footer-box-d -->
+                        </div>
+                        <!-- end col -->
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-box-d">
+                                <h3>Location</h3>
+                                <div id="googleMap" style="width:350px;height:200px;"></div>
                             </div>
                             <!-- end footer-box-d -->
                         </div>
@@ -753,7 +781,8 @@
     <!-- end footer-main -->
     <!-- to enable the user to go to the up -->
     <a href="#" class="scrollup" style="display: none;">Scroll</a>
-
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw11_jg9eDdVEQOxcuDwRBQYsErelRKDo&callback=myMap"></script>
     <!-- ALL JS FILES -->
     <script src="js/all.js"></script>
     <script src="js/bootstrap.min.js"></script>
